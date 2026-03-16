@@ -41,7 +41,6 @@ interface MCQForm {
 }
 
 const initialData = {
-  _id : '',
   question: "",
   options: ["", "", "", ""],
   correct_answer: 0,
@@ -97,28 +96,34 @@ export default function MCQEditAndCreate({ id }: Props) {
           setSubjects(data?.data || []);
       } catch (e: any) {
         console.log(e?.message || "Failed to fetch subject data.");
+      } finally{
+        setInitialLoading(false);
       }
     };
 
     const fetchDifficulty = async () => {
        try {
-           const res = await fetch("/api/defficulty-level?page=0&limit=100");
-          const data = await res.json();
-          setDifficulties(data?.data || []);
-       } catch(e: any){
-        console.log(e?.message || "Failed to fetch difficulty level data.");
+         const res = await fetch("/api/defficulty-level?page=0&limit=100");
+         const data = await res.json();
+         setDifficulties(data?.data || []);
+       } catch (e: any) {
+         console.log(e?.message || "Failed to fetch difficulty level data.");
+       } finally {
+         setInitialLoading(false);
        }
-        };
+        } ;
 
     const fetchTopics = async (id : string) => {
               try {
-                      const res = await fetch(
-                        `/api/topic?subject=${id}&page=0&limit=100`,
-                      );
-                      const data = await res.json();
-                      setTopics(data?.data || []);
+                const res = await fetch(
+                  `/api/topic?subject=${id}&page=0&limit=100`,
+                );
+                const data = await res.json();
+                setTopics(data?.data || []);
               } catch (e: any) {
                 console.log(e?.message || "Failed to fetch topic data.");
+              } finally {
+                setInitialLoading(false);
               }
             };
 
@@ -178,7 +183,6 @@ export default function MCQEditAndCreate({ id }: Props) {
     }
   };
 
-  console.log("form : ", form);
 
   if (initialLoading) {
     return (

@@ -112,6 +112,7 @@ export const POST = async (request : NextRequest) => {
         const body = await request.json();
         const session: Session | null = await auth();
 
+
         const isUserAllowed = checkUserRouteAccess(session, 'super_admin');
 
         if (!isUserAllowed) {
@@ -124,10 +125,7 @@ export const POST = async (request : NextRequest) => {
           const status = await ContentStatus.find({ name: "public" });
 
 
-        const mcq = await Mcq.create({
-            ...body,
-            status : status[0]?._id
-        });
+        const mcq = await Mcq.create({ ...body, writer: session?.user.id });
 
         if (!mcq) {
             return NextResponse.json({

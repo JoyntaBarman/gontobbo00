@@ -75,7 +75,7 @@ const MCQSchema = new Schema(
     status: {
       type: Schema.Types.ObjectId,
       ref: "Status",
-    //   required: [true, "Status is required for this MCQ"],
+      required: [true, "Status is required for this MCQ"],
       default: "698d65330f317b4bb998216e",
     //   type: Schema.Types.ObjectId,
     //   ref: "Status",
