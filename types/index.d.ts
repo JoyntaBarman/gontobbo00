@@ -40,7 +40,6 @@ export interface DifficltyLevelType {
     updatedAt: Date;
 }
 
-
 export interface StatusType {
     _id: string;
     name: string;
@@ -80,4 +79,17 @@ export interface MCQType {
     source?: string | null;
     createdAt?: Date;
     updatedAt?: Date;
+}
+
+// lib/upload-image.ts
+export interface UploadOptions {
+  onProgress?: (progress: number) => void;
+  abortController?: AbortController;
+}
+
+export interface UploadResult {
+  url: string;
+  filename: string;
+  size: number;
+  mimeType: string;
 }

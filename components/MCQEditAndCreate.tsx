@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { DropdownType } from "@/types";
 
 interface Props {
-  id?: string;
+  id?: number;
 }
 
 interface MCQForm {
